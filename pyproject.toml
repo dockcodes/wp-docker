@@ -1,6 +1,6 @@
 [project]
 name = "wp-docker"
-version = "0.1.1"
+version = "0.1.2"
 description = "WordPress Docker Installer CLI tool with Docker setup and preconfigured theme"
 authors = [{ name = "Jacek Labudda" }]
 readme = "README.md"
