@@ -1,16 +1,27 @@
-### Usage
+# WP Docker CLI
 
-1. Run command `make up` for linux/mac-os or `make up-win`.
-2. Install npm `make bash` => `cd wp-content/themes/dock` => `npm install`
-3. Compile npm `make bash` => `cd wp-content/themes/dock` => `npm run build`
-4. Go to website http://localhost <- port from .env file.
-5. Go to phpmyadmin http://localhost:8080 <- port from .env file.
+**WP Docker CLI** to narzędzie do szybkiego tworzenia projektów WordPress z Dockerem.  
+Automatyzuje:
 
-#### Usefully commands
-- Docker start: `make up` or `make up-win`
-- Docker stop: `make down` or `make down-win`
-- Go do bash: `make bash` or `make bash-win`
-- Make database backup: `make db-dump`
+- pobranie najnowszego WordPressa
+- kopiowanie własnego theme
+- generowanie `.env`
+- uruchomienie Docker Compose
+- aktywację theme w kontenerze APP
+- inicjalizację repozytorium Git i push do remote
 
-#### Import DB
-docker exec -i example_mysql mariadb -uwordpress -psecret wordpress < dumps/dump.sql
+---
+
+## Instalacja
+
+```bash
+pip install wp-docker-cli
+```
+
+## Użycie
+
+Tworzenie nowego projektu:
+
+```bash
+wp-docker init "Nazwa Projektu"
+```
