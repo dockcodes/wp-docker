@@ -46,12 +46,7 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_CHARSET: ${DB_CHARSET}
       DB_TABLE_PREFIX: ${DB_TABLE_PREFIX}
-      WP_PAB_TOKEN: ${WP_PAB_TOKEN}
-      WP_PAB_PRIVATE_KEY: ${WP_PAB_PRIVATE_KEY}
-      WP_PAB_ENV: ${WP_PAB_ENV}
       WP_ENV: ${WP_ENV}
-      WP_MAIL_USERNAME: ${WP_MAIL_USERNAME}
-      WP_MAIL_PASSWORD: ${WP_MAIL_PASSWORD}
       TZ: ${TZ}
     networks:
       - app_network
@@ -79,11 +74,6 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_CHARSET: ${DB_CHARSET}
       DB_TABLE_PREFIX: ${DB_TABLE_PREFIX}
-      WP_PAB_TOKEN: ${WP_PAB_TOKEN}
-      WP_PAB_PRIVATE_KEY: ${WP_PAB_PRIVATE_KEY}
-      WP_PAB_ENV: ${WP_PAB_ENV}
-      WP_MAIL_USERNAME: ${WP_MAIL_USERNAME}
-      WP_MAIL_PASSWORD: ${WP_MAIL_PASSWORD}
       TZ: ${TZ}
     networks:
       - app_network

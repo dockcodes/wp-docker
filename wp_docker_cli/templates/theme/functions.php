@@ -94,19 +94,3 @@ add_action('wp_enqueue_scripts', 'project_force_remove_styles', 99999);
 add_action('wp_print_styles', 'project_force_remove_styles', 99999);
 
 add_filter('wpseo_llmstxt_filesystem_path', fn ($path) => WP_CONTENT_DIR . '/uploads/');
-
-add_action('phpmailer_init', function ($phpmailer) {
-    $phpmailer->isSMTP();
-    $phpmailer->SMTPAuth = true;
-    $phpmailer->Host = defined('WP_MAIL_HOST') ? WP_MAIL_HOST : 'mailpit.dock.codes';
-    $phpmailer->Port = (int)(defined('WP_MAIL_PORT') ? WP_MAIL_PORT : 2525);
-    $phpmailer->SMTPSecure = defined('WP_MAIL_SECURE') ? WP_MAIL_SECURE : 'none';
-    $phpmailer->Username = defined('WP_MAIL_USERNAME') ? WP_MAIL_USERNAME : '';
-    $phpmailer->Password = defined('WP_MAIL_PASSWORD') ? WP_MAIL_PASSWORD : '';
-    if (empty($phpmailer->From) || $phpmailer->From === 'wordpress@localhost') {
-        $phpmailer->From     = 'hello@dock.codes';
-        $phpmailer->FromName = 'Dock Codes';
-    }
-}, 20);
-add_filter('wp_mail_from', fn ($original_email_address) => 'hello@dock.codes');
-add_filter('wp_mail_from_name', fn ($original_email_from) => 'Dock Codes');
