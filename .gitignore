@@ -3,4 +3,5 @@
 .env
 .venv
 dist
+wp_docker/__pycache__
 *.egg-info
