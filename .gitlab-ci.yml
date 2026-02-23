@@ -6,10 +6,13 @@ variables:
 
 publish:
   stage: publish
-  image: python:3.14-slim-bullseye
+  image: python:3.14
   only:
     - master
   before_script:
+    - apt-get update && apt-get install -y wget curl
+    - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    - python3 get-pip.py
     - python3 -m pip install --upgrade pip
     - python3 -m pip install build twine
   script:
