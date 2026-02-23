@@ -4,9 +4,9 @@ stages:
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
-publish-python-package:
+publish:
   stage: publish
-  image: python:3.14
+  image: python:3.14-slim-bullseye
   only:
     - master
   before_script:
