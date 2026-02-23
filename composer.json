@@ -1,5 +1,5 @@
 {
-  "name": "dock/wordpress-docker",
+  "name": "dock/wordpress-core",
   "description": "WordPress + Docker boilerplate",
   "type": "project",
   "license": "MIT",
