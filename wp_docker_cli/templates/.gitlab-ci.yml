@@ -1,0 +1,80 @@
+default:
+  tags:
+    - common
+
+stages:
+  - build
+  - push
+  - preparing
+  - deploy
+
+.delivery:
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+    - export BRANCH_SUFFIX="${CI_COMMIT_TAG:-${CI_COMMIT_REF_NAME##*/}}"
+    - BRANCH_SUFFIX="${BRANCH_SUFFIX#release/}"
+
+build_app:
+  stage: build
+  extends: .delivery
+  script:
+    - docker build --progress=plain --target=prod -f ./Dockerfile -t $CI_REGISTRY_IMAGE:$BRANCH_SUFFIX .
+  only:
+    - develop
+    - stage
+    - /^release\/.*$/
+
+push_app:
+  stage: push
+  extends: .delivery
+  script:
+    - docker tag $CI_REGISTRY_IMAGE:$BRANCH_SUFFIX $CI_REGISTRY/$CI_REGISTRY_IMAGE:$BRANCH_SUFFIX
+    - docker push "$CI_REGISTRY/$CI_REGISTRY_IMAGE:$BRANCH_SUFFIX"
+  only:
+    - develop
+    - stage
+    - /^release\/.*$/
+
+push_latest:
+  stage: push
+  extends: .delivery
+  script:
+    - docker tag $CI_REGISTRY_IMAGE:$BRANCH_SUFFIX $CI_REGISTRY/$CI_REGISTRY_IMAGE:latest
+    - docker push "$CI_REGISTRY/$CI_REGISTRY_IMAGE:latest"
+  only:
+    - /^release\/.*$/
+
+preparing:
+  stage: preparing
+  extends: .delivery
+  script:
+    - mkdir -p ~/.ssh
+    - cp "$DEPLOY_PRIVATE_KEY" ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -p $DEPLOY_PORT -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+    - docker rmi "$CI_REGISTRY/$CI_REGISTRY_IMAGE:$BRANCH_SUFFIX" || true
+    - docker rmi "$CI_REGISTRY/$CI_REGISTRY_IMAGE:latest" || true
+  only:
+    - develop
+    - stage
+    - /^release\/.*$/
+
+deploy_staging:
+  stage: deploy
+  environment:
+    name: dev
+    url: https://dev.dock.codes
+  script:
+    - ssh -i ~/.ssh/id_rsa -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && sh -" < scripts/update.sh
+  only:
+    - develop
+
+deploy_production:
+  stage: deploy
+  environment:
+    name: prod
+    url: https://dock.codes
+  script:
+    - ssh -i ~/.ssh/id_rsa -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && sh -" < scripts/update.sh
+  only:
+    - /^release\/.*$/
