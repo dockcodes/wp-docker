@@ -1,5 +1,5 @@
 import sys
-from wp_docker_cli.installer import run_installer
+from wp_docker.installer import run_installer
 
 def main():
     if len(sys.argv) < 2:

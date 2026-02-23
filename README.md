@@ -15,7 +15,7 @@ Automatyzuje:
 ## Instalacja
 
 ```bash
-pip install wp-docker-cli
+python3 -m pip install wp-docker
 ```
 
 ## Użycie
