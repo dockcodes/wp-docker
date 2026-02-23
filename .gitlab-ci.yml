@@ -8,7 +8,7 @@ publish-python-package:
   stage: publish
   image: python:3.14
   only:
-    - tags
+    - master
   before_script:
     - python -m pip install --upgrade pip
     - pip install build twine
