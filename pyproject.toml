@@ -1,6 +1,6 @@
 [project]
 name = "wp-docker"
-version = "0.1.2"
+version = "0.1.3"
 description = "WordPress Docker Installer CLI tool with Docker setup and preconfigured theme"
 authors = [{ name = "Jacek Labudda" }]
 readme = "README.md"
@@ -19,3 +19,6 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["wp_docker"]
 include = ["*"]
+
+[tool.setuptools.package-data]
+wp_docker = ["templates/**"]
