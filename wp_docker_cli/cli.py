@@ -10,7 +10,8 @@ def main():
 
     if cmd == "init":
         project_name = sys.argv[2] if len(sys.argv) > 2 else input("Project name: ")
-        run_installer(project_name)
+        theme_name = sys.argv[3] if len(sys.argv) > 3 else 'core'
+        run_installer(project_name, theme_name)
     else:
         print(f"Unknown command: {cmd}")
         sys.exit(1)

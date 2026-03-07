@@ -1,0 +1,11 @@
+/*
+Theme Name: Dock Theme
+Theme URI: https://dock.codes
+Author: Dock
+Description: Minimal WordPress theme.
+Version: 1.0
+License: GPLv2 or later
+Text Domain: dock-theme
+*/
+
+@import "assets/dist/style.css";

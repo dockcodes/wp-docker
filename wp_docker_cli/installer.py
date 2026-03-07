@@ -7,7 +7,7 @@ def slugify(name):
     name = re.sub(r'[^a-z0-9]+', '-', name)
     return name.strip('-')
 
-def run_installer(project_name: str):
+def run_installer(project_name: str, theme_name: str = "core"):
     slug = slugify(project_name)
     print(f"Project slug: {slug}")
 
@@ -45,7 +45,7 @@ def run_installer(project_name: str):
     print("✔ WordPress ready")
 
     # 3️⃣ copy theme
-    theme_src = template_dir / "theme"
+    theme_src = template_dir / f"theme-{theme_name}"
     theme_dest = wp_dir / "wp-content/themes/dock"
     if theme_dest.exists():
         shutil.rmtree(theme_dest)
