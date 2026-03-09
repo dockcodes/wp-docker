@@ -2,13 +2,17 @@
   "name": "dock-theme",
   "version": "1.0.0",
   "scripts": {
-    "build": "tailwindcss -i ./src/css/app.css -o ./dist/app.css --minify",
-    "watch": "tailwindcss -i ./src/css/app.css -o ./dist/app.css --watch"
+    "build:scss": "sass ./assets/scss/app.scss ./assets/dist/app.css --no-source-map --style=expanded",
+    "build:tailwind": "tailwindcss -i ./assets/dist/app.css -o ./assets/dist/app.css --minify",
+    "build": "npm run build:scss && npm run build:tailwind",
+    "watch:scss": "sass --watch ./assets/scss/app.scss:./assets/dist/app.css",
+    "watch:tailwind": "tailwindcss -i ./assets/dist/app.css -o ./assets/dist/app.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
-    "@tailwindcss/typography": "^0.5.0"
+    "@tailwindcss/typography": "^0.5.0",
+    "sass": "^1.66.0"
   }
 }
