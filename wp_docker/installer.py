@@ -161,7 +161,7 @@ def run_installer(project_name: str, theme_name: str = "core"):
     # 5️⃣ start docker
     load_dotenv(project_dir / ".env")
     print("🐳 Starting Docker...")
-    subprocess.run(["docker", "build", "--progress=plain", "--target=prod", "-f", "./Dockerfile", "-t", f"{os.getenv("DOCKERHUB_REGISTRY")}{os.getenv("IMAGE_NAME_APP")}:latest", "."], cwd=str(project_dir), check=True)
+    subprocess.run(["docker", "build", "--progress=plain", "--target=build", "-f", "./Dockerfile", "-t", f"{os.getenv("DOCKERHUB_REGISTRY")}{os.getenv("IMAGE_NAME_APP")}:latest", "."], cwd=str(project_dir), check=True)
     subprocess.run(["make", "up-dev"], cwd=str(project_dir), check=True)
 
     time.sleep(5)

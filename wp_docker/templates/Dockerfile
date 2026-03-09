@@ -31,3 +31,11 @@ RUN cd /var/www/html/wp-content/themes/ctl \
     && npm ci \
     && npm run build \
     && rm -rf node_modules
+
+FROM base AS build
+
+USER www-data
+
+COPY --chown=www-data:www-data wordpress /var/www/html
+
+WORKDIR /var/www/html
