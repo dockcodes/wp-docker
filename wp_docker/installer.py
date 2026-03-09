@@ -162,7 +162,7 @@ def run_installer(project_name: str, theme_name: str = "core"):
     load_dotenv(project_dir / ".env")
     print("🐳 Starting Docker...")
     subprocess.run(["docker", "build", "--progress=plain", "--target=build", "-f", "./Dockerfile", "-t", f"{os.getenv("DOCKERHUB_REGISTRY")}{os.getenv("IMAGE_NAME_APP")}:latest", "."], cwd=str(project_dir), check=True)
-    subprocess.run(["make", "up-dev"], cwd=str(project_dir), check=True)
+    subprocess.run(["make", "up"], cwd=str(project_dir), check=True)
 
     time.sleep(5)
     # 6️⃣ activate theme in app container
@@ -176,6 +176,5 @@ def run_installer(project_name: str, theme_name: str = "core"):
         if wordpress_dir.exists():
             shutil.rmtree(wordpress_dir)
         subprocess.run(f"docker cp {container}:/var/www/html {wordpress_dir}", shell=True)
-        subprocess.run(["make", "down"], cwd=str(project_dir), check=True)
 
     print(f"✅ Project {slug} installed successfully in {project_dir}")

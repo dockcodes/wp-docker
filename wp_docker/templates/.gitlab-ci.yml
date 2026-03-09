@@ -5,8 +5,6 @@ default:
 stages:
   - build
   - push
-  - preparing
-  - deploy
 
 .delivery:
   before_script:
@@ -41,40 +39,5 @@ push_latest:
   script:
     - docker tag $CI_REGISTRY_IMAGE:$BRANCH_SUFFIX $CI_REGISTRY/$CI_REGISTRY_IMAGE:latest
     - docker push "$CI_REGISTRY/$CI_REGISTRY_IMAGE:latest"
-  only:
-    - /^release\/.*$/
-
-preparing:
-  stage: preparing
-  extends: .delivery
-  script:
-    - mkdir -p ~/.ssh
-    - cp "$DEPLOY_PRIVATE_KEY" ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -p $DEPLOY_PORT -H $DEPLOY_HOST >> ~/.ssh/known_hosts
-    - docker rmi "$CI_REGISTRY/$CI_REGISTRY_IMAGE:$BRANCH_SUFFIX" || true
-    - docker rmi "$CI_REGISTRY/$CI_REGISTRY_IMAGE:latest" || true
-  only:
-    - develop
-    - stage
-    - /^release\/.*$/
-
-deploy_staging:
-  stage: deploy
-  environment:
-    name: dev
-    url: https://dev.dock.codes
-  script:
-    - ssh -i ~/.ssh/id_rsa -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && sh -" < scripts/update.sh
-  only:
-    - develop
-
-deploy_production:
-  stage: deploy
-  environment:
-    name: prod
-    url: https://dock.codes
-  script:
-    - ssh -i ~/.ssh/id_rsa -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && sh -" < scripts/update.sh
   only:
     - /^release\/.*$/

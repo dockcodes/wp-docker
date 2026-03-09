@@ -5,20 +5,15 @@ export GROUP_ID=$(shell id -g)
 
 up:
 	docker compose --env-file .env -f docker-compose.yml up -d
-up-dev:
-	docker compose --env-file .env -f docker-compose.yml -f docker-compose-dev.yml up -d
 up-build:
 	docker compose -f docker-compose.yml --env-file .env build
 	docker compose -f docker-compose.yml --env-file .env up -d
-up-build-dev:
-	docker compose -f docker-compose.yml -f docker-compose-dev.yml --env-file .env build
-	docker compose -f docker-compose.yml -f docker-compose-dev.yml --env-file .env up -d
 down:
 	docker compose down
 sh:
 	docker exec -it ${CONTAINER_NAME_APP} sh
 db-dump:
-	docker compose exec -T db mysqldump --databases ${DB_DATABASE} -u ${DB_USERNAME} --password=${DB_PASSWORD} | gzip -9 > ./dumps/db-backup-$(shell date +%F).sql.gz
+	docker compose exec -T db mariadb-dump --databases ${DB_DATABASE} -u ${DB_USERNAME} --password=${DB_PASSWORD} | gzip -9 > ./dumps/db-backup-$(shell date +%F).sql.gz
 	find dumps -mtime +30 -exec rm -rf {} \;
 up-win:
 	docker compose --env-file .env up -d
