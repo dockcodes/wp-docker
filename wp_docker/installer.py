@@ -160,7 +160,7 @@ def run_installer(project_name: str, theme_name: str = "core"):
 
     # 5️⃣ start docker
     print("🐳 Starting Docker...")
-    subprocess.run(["make", "up-dev"], cwd=str(project_dir), check=True)
+    subprocess.run(["make", "up-build-dev"], cwd=str(project_dir), check=True)
 
     # 6️⃣ activate theme in app container
     load_dotenv(project_dir / ".env")

@@ -10,6 +10,9 @@ up-dev:
 up-build:
 	docker compose -f docker-compose.yml --env-file .env build
 	docker compose -f docker-compose.yml --env-file .env up -d
+up-build-dev:
+	docker compose -f docker-compose.yml -f docker-compose-dev.yml --env-file .env build
+	docker compose -f docker-compose.yml -f docker-compose-dev.yml --env-file .env up -d
 down:
 	docker compose down
 sh:
