@@ -171,9 +171,4 @@ def run_installer(project_name: str, theme_name: str = "core"):
         subprocess.run(f"docker exec {container} wp theme activate dock --allow-root", shell=True)
         print("✔ Theme activated")
 
-        wordpress_dir = Path(project_dir / "wordpress")
-        if wordpress_dir.exists():
-            shutil.rmtree(wordpress_dir)
-        subprocess.run(f"docker cp {container}:/var/www/html {wordpress_dir}", shell=True)
-
     print(f"✅ Project {slug} installed successfully in {project_dir}")
