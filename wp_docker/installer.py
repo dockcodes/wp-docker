@@ -162,17 +162,12 @@ def run_installer(project_name: str, theme_name: str = "core"):
     print("🐳 Starting Docker...")
     subprocess.run(["make", "up-build-dev"], cwd=str(project_dir), check=True)
 
+    time.sleep(5)
     # 6️⃣ activate theme in app container
     load_dotenv(project_dir / ".env")
     container = os.getenv("CONTAINER_NAME_APP")
     if container:
         print("🎨 Activating theme in container...")
-        # wait for WordPress
-        for _ in range(30):
-            code = subprocess.run(f"docker exec {container} wp core is-installed --path=/var/www/html --url=http://localhost --allow-root", shell=True)
-            if code.returncode == 0:
-                break
-            time.sleep(2)
         subprocess.run(f"docker exec {container} wp theme activate dock --allow-root", shell=True)
         print("✔ Theme activated")
         subprocess.run(f"docker cp {container}:/var/www/html {project_dir}/wordpress", shell=True)
