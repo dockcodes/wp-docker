@@ -2,17 +2,21 @@
   "name": "dock-theme",
   "version": "1.0.0",
   "scripts": {
-    "build:scss": "sass ./assets/scss/app.scss ./assets/dist/app.css --no-source-map --style=expanded",
-    "build:tailwind": "tailwindcss -i ./assets/dist/app.css -o ./assets/dist/app.css --minify",
-    "build": "npm run build:scss && npm run build:tailwind",
-    "watch:scss": "sass --watch ./assets/scss/app.scss:./assets/dist/app.css",
-    "watch:tailwind": "tailwindcss -i ./assets/dist/app.css -o ./assets/dist/app.css --watch"
+    "build:css": "tailwindcss -i ./assets/scss/app.scss -o ./assets/dist/app.css --minify",
+    "watch:css": "tailwindcss -i ./assets/scss/app.scss -o ./assets/dist/app.css --watch",
+    "build:js": "webpack --mode production",
+    "watch:js": "webpack --mode development --watch",
+    "build": "npm run build:css && npm run build:js",
+    "watch": "npm-run-all --parallel watch:css watch:js"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
     "@tailwindcss/typography": "^0.5.0",
-    "sass": "^1.66.0"
+    "sass": "^1.66.0",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.0",
+    "npm-run-all": "^4.1.5"
   }
 }
