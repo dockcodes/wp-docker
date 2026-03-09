@@ -5,6 +5,8 @@ export GROUP_ID=$(shell id -g)
 
 up:
 	docker compose --env-file .env -f docker-compose.yml up -d
+up-dev:
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose-dev.yml up -d
 up-build:
 	docker compose -f docker-compose.yml --env-file .env build
 	docker compose -f docker-compose.yml --env-file .env up -d
