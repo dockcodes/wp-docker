@@ -2,22 +2,21 @@
   "name": "dock-theme",
   "version": "1.0.0",
   "scripts": {
-    "build:css": "tailwindcss -i ./assets/scss/app.scss -o ./assets/dist/app.css --minify",
-    "watch:css": "tailwindcss -i ./assets/scss/app.scss -o ./assets/dist/app.css --watch",
+    "build:css": "tailwindcss -i ./assets/css/app.css -o ./assets/dist/app.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/app.css -o ./assets/dist/app.css --watch",
     "build:js": "webpack --mode production",
     "watch:js": "webpack --mode development --watch",
     "build": "npm run build:css && npm run build:js",
     "watch": "npm-run-all --parallel watch:css watch:js"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.0",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0",
     "@tailwindcss/typography": "^0.5.0",
+    "autoprefixer": "^10.4.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
     "terser-webpack-plugin": "^5.3",
-    "sass": "^1.66.0",
     "webpack": "^5.90.0",
-    "webpack-cli": "^5.1.0",
-    "npm-run-all": "^4.1.5"
+    "webpack-cli": "^5.1.0"
   }
 }
