@@ -76,8 +76,13 @@ def run_installer(project_name: str, theme_name: str = "core"):
 
     # 2️⃣ WordPress download
     wp_dir = project_dir / "wordpress"
+    tags = subprocess.check_output(
+        ["git", "ls-remote", "--tags", "https://github.com/WordPress/WordPress.git"]
+    ).decode("utf-8")
+    stable_tags = re.findall(r"refs/tags/(\d+\.\d+\.\d+)$", tags)
+    latest_stable = sorted(stable_tags, key=lambda s: list(map(int, s.split("."))))[-1]
     subprocess.run([
-        "git", "clone", "--depth", "1",
+        "git", "clone", "--depth", "1", "--branch", latest_stable,
         "https://github.com/WordPress/WordPress.git",
         str(wp_dir)
     ], check=True)
