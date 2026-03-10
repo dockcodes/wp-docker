@@ -2,10 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Inter', sans-serif;
-}
-
-h1 {
-  color: theme('colors.blue.700');
-}
+@use "fonts";
