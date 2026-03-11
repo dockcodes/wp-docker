@@ -133,6 +133,7 @@ define('WCPAY_DEV_MODE', true);
 define('FS_METHOD', 'direct');
 define('ALLOW_UNFILTERED_UPLOADS', true);
 define('WP_ENV', getenv_docker('WP_ENV', 'local') ?: 'local');
+define('WP_ENVIRONMENT_TYPE', WP_ENV);
 define('WP_MEMORY_LIMIT', getenv_docker('PHP_MEMORY_LIMIT', '256M'));
 //define('WP_REDIS_IGNORED_GROUPS', ['WPML_Cache_Terms_Per_Lang', 'terms', 'nav_menu_relationships']);
 /* That's all, stop editing! Happy publishing. */
