@@ -41,4 +41,6 @@ function custom_register_acf_options()
 }
 add_action('init', 'custom_register_acf_options');
 
+add_filter('use_block_editor_for_post', '__return_false');
+
 add_filter('wpseo_llmstxt_filesystem_path', fn($path) => WP_CONTENT_DIR . '/uploads/');
