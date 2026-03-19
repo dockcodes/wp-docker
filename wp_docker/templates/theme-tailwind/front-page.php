@@ -8,16 +8,12 @@ get_header(); ?>
     <?php
     if (have_posts()) :
         while (have_posts()) : the_post();
-            $page_sections = get_field('page_sections');
-            if ($page_sections) {
-                foreach ($page_sections as $section) {
-                    $section_name = str_replace('_', '-', $section['acf_fc_layout']);
-                    $file = locate_template('template-parts/sections/' . $section_name . '.php');
-                    if ($file) {
-                        get_template_part('template-parts/sections/' . $section_name, null, ['section_data' => $section]);
-                    }
-                }
-            }
+            if (have_rows('page_sections')) :
+                while (have_rows('page_sections')) : the_row();
+                    $section_name = get_row_layout();
+                    get_template_part('template-parts/sections/' . $section_name);
+                endwhile;
+            endif;
         endwhile;
     endif;
     ?>

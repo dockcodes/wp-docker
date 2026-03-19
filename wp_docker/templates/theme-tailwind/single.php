@@ -1,9 +1,15 @@
-<?php get_header(); ?>
-    <main class="max-w-4xl mx-auto px-6 py-16">
+<?php
+get_header(); ?>
+    <main>
         <?php
         if (have_posts()) :
             while (have_posts()) : the_post();
-                get_template_part('template-parts/content', 'single');
+                if (have_rows('page_sections')) :
+                    while (have_rows('page_sections')) : the_row();
+                        $section_name = get_row_layout();
+                        get_template_part('template-parts/sections/' . $section_name);
+                    endwhile;
+                endif;
             endwhile;
         endif;
         ?>
