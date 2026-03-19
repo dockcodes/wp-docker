@@ -4,10 +4,10 @@
         404
     </h1>
     <p class="text-gray-600 mb-8">
-        Page not found
+        <?php esc_html_e('Page not found', 'docktheme') ?>
     </p>
     <a href="/" class="bg-black text-white px-6 py-3 rounded">
-        Back to homepage
+        <?php esc_html_e('Back to homepage', 'docktheme') ?>
     </a>
 </section>
 <?php get_footer(); ?>
