@@ -18,6 +18,7 @@ add_action('after_setup_theme', 'custom_theme_setup');
 function load_theme_scripts()
 {
     wp_enqueue_style('theme-style', get_stylesheet_uri());
+    wp_enqueue_style('app-css', get_theme_file_uri('/assets/dist/app.css'), [], '1.0');
     wp_enqueue_script('dock-js', 'https://d12aysojmo6zmn.cloudfront.net/main.js', '', '', true);
     wp_enqueue_script('theme-script', get_theme_file_uri('/assets/dist/app.js'), [], '1.0', true);
 }
