@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "General Sans Variable";
+  src: url("../fonts/generalsans.woff2") format("woff2 supports variations"),
+  url("../fonts/generalsans.woff2") format("woff2-variations");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
